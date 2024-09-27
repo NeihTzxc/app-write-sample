@@ -1,5 +1,5 @@
 import AppExpress from "@itznotabug/appexpress"
-const app = new AppExpress()
+const router = new AppExpress()
 const getUser = (req, res) => {
     const { username } = req.params 
     res.json({
@@ -13,7 +13,7 @@ const createUser = (req, res) => {
     }) 
 }
 
-app.get('/user/:username', getUser)
-app.post("/user", createUser)
+router.get('/user/:username', getUser)
+router.post("/user", createUser)
 
 export default router
