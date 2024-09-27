@@ -1,5 +1,5 @@
 import AppExpress from "@itznotabug/appexpress"
-
+const app = new AppExpress()
 const getUser = (req, res) => {
     const { username } = req.params 
     res.json({
