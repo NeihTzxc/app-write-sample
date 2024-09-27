@@ -20,11 +20,11 @@ const getUsers = async (req, res, log, error) => {
         const response = await users.list();
         log(`Response: ${response}`)
         log(`Responce JSON: ${JSON.stringify(response)}`)
-        return res.status(200).json({
+        return res.json({
             'users': response
         })
     } catch (error) {
-        return res.status(400).json({
+        return res.json({
             "error": error
         })
     }
