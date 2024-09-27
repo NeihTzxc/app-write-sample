@@ -9,18 +9,25 @@ const getRouters = (req, res) => {
     })
 }
 
-const getUsers = (req, res, log, error) => {
-    const client = new Client()
-    .setEndpoint(process.env.APPWRITE_FUNCTION_API_ENDPOINT)
-    .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)
-    .setKey(req.headers['x-appwrite-key'] ?? '');
-    const users = new Users(client);
-    const response = users.list();
-    log(`Response: ${response}`)
-    res.json({
-        'users': response
-    })
-
+const getUsers = async (req, res, log, error) => {
+    try{
+        const client = new Client()
+        .setEndpoint(process.env.APPWRITE_FUNCTION_API_ENDPOINT)
+        .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)
+        .setKey(req.headers['x-appwrite-key'] ?? '');
+        const users = new Users(client);
+        log(`Users: ${users}`)
+        const response = await users.list();
+        log(`Response: ${response}`)
+        log(`Responce JSON: ${JSON.stringify(response)}`)
+        return res.status(200).json({
+            'users': response
+        })
+    } catch (error) {
+        return res.status(400).json({
+            "error": error
+        })
+    }
 }
 
 app.get('/', getRouters)
