@@ -4,7 +4,6 @@ import authMiddleware from "./middleware/auth.js"
 const app = new AppExpress()
 
 app.middleware(authMiddleware)
-app.get('/', getRouters)
 app.use("/user", userRoutes)
 
 export default async (context) => await app.attach(context);
